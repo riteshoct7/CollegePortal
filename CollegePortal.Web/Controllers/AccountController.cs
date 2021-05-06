@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AutoMapper;
 using CollegePortal.Entity.Models;
+using System.Linq;
 
 namespace CollegePortal.Web.Controllers
 {
@@ -36,9 +37,28 @@ namespace CollegePortal.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            return View();
+            
+            if (ModelState.IsValid)
+            {
+                var user = authenticationService.Login(model.UserName, model.Password);
+                if (user != null)
+                {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
+
+                    if (user.Role.Contains("Admin"))
+                    {
+                        return RedirectToAction("Dashboard", "Dashboard", new { area = "Admin" });
+                    }
+                    else if (user.Role.Contains("User"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "User" });
+                    }
+                }
+            }
+            return View(model);
         }
 
         [HttpGet]
