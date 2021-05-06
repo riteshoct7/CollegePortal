@@ -1,0 +1,21 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/CiollegePortal.Entity/obj
+/CiollegePortal.Entity/bin/Debug/net5.0
+/CollegePortal.Common/obj
+/CollegePortal.Common/bin/Debug/net5.0
+/CollegePortal.Datbase/bin/Debug
+/CollegePortal.Datbase/obj/Debug
+/CollegePortal.Repository/bin/Debug/net5.0
+/CollegePortal.Repository/obj
+/CollegePortal.Resources/bin/Debug/net5.0
+/CollegePortal.Resources/obj
+/CollegePortal.Services/bin/Debug/net5.0
+/CollegePortal.Services/obj
+/CollegePortal.Web/bin/Debug/net5.0
+/CollegePortal.Web/obj
+/CollegePortal.WebApi/bin/Debug/net5.0
+/CollegePortal.WebApi/obj
