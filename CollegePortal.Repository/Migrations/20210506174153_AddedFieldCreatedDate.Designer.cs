@@ -4,14 +4,16 @@ using CollegePortal.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CollegePortal.Repository.Migrations
 {
     [DbContext(typeof(CollegePortalDbContext))]
-    partial class CollegePortalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210506174153_AddedFieldCreatedDate")]
+    partial class AddedFieldCreatedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

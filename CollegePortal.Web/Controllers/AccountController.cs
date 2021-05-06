@@ -1,6 +1,10 @@
 ﻿using CollegePortal.Services.Interfaces;
 using CollegePortal.Web.ViewModels;
+using CollegePortal.Common;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using AutoMapper;
+using CollegePortal.Entity.Models;
 
 namespace CollegePortal.Web.Controllers
 {
@@ -8,15 +12,17 @@ namespace CollegePortal.Web.Controllers
     {
         #region Properties
 
-        private readonly IAuthenticationService authenticationService; 
+        private readonly IAuthenticateService authenticationService;
+        private readonly IMapper mapper;
 
         #endregion
 
         #region Constructors
 
-        public AccountController(IAuthenticationService authenticationService)
+        public AccountController(IAuthenticateService authenticationService, IMapper mapper)
         {
             this.authenticationService = authenticationService;
+            this.mapper = mapper;
         }
 
         #endregion
@@ -42,9 +48,20 @@ namespace CollegePortal.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(SignUpViewModel model)
+        public async Task<ActionResult> SignUp(SignUpViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var user = mapper.Map<User>(model);
+                user.UserName = model.Email;
+                user.CreatedDate = Util.GetCurrentDateTime();
+                bool result = await authenticationService.SignUp(user, model.Password);
+                if (result)
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+            return View(model);
         }
 
         #endregion

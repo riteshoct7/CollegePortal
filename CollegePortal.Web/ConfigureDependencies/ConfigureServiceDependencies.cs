@@ -11,7 +11,7 @@ namespace CollegePortal.Web.ConfigureDependencies
         public static void AddServices(IServiceCollection services)
         {
             services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IAuthenticateService, AuthenticationService>();
         } 
 
         #endregion

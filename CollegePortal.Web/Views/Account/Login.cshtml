@@ -4,14 +4,21 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-
-
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
+    <div class="col-md-6">
+        <h1 class="auth-title">Social Login</h1>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="Login" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+                <h1 class="auth-title">Login to your account</h1>
+                <p>
+                    Don't have a College Portal Account?
+                    @Html.ActionLink("Click Here", "SignUp", null, new { @class = "lnk-toggler" })  to get started.
+                </p>
+            </div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
                 <input asp-for="UserName" class="form-control" />
@@ -23,13 +30,14 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <input type="submit" value="Login" class="btn btn-lg btn-primary btn-block" />
+            </div>
+            <div class="form-group">
+                @Html.ActionLink("Forgot Password ?", "ForgotPassword", null, new { @class = "lnk-toggler" })
             </div>
         </form>
     </div>
 </div>
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -4,63 +4,97 @@
     ViewData["Title"] = "SignUp";
 }
 
-<h1>Sign Up</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <form asp-action="SignUp">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                <div class="form-group">
+                    <h2 class="text-center">Sign Up For Free</h2>
+                </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="SignUp">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MiddleInitials" class="control-label"></label>
-                <input asp-for="MiddleInitials" class="form-control" />
-                <span asp-validation-for="MiddleInitials" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="SubscribedForPromotions" /> @Html.DisplayNameFor(model => model.SubscribedForPromotions)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="AcceptedTermsCondition" /> @Html.DisplayNameFor(model => model.AcceptedTermsCondition)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Sign Up" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label class="float-right control-label">
+                        <span class="m-0 text-danger">*</span><small> Indicates required</small>
+                    </label>
+                    <br />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">
+                    </label>
+                    <span class="m-0 text-danger">*</span>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label">
+
+                    </label>
+                    <span class="m-0 text-danger">*</span>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label">
+
+                    </label>
+                    <span class="m-0 text-danger">*</span>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label">
+
+                    </label>
+                    <span class="m-0 text-danger">*</span>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label">
+                    </label>
+                    <span class="m-0 text-danger">*</span>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="SubscribedForPromotions" /> @Html.DisplayNameFor(model => model.SubscribedForPromotions)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+
+                        <input class="form-check-input" asp-for="AcceptedTermsCondition" /> @Html.DisplayNameFor(model => model.AcceptedTermsCondition)
+                    </label>
+                    <span class="m-0 text-danger">*</span>
+                    <span asp-validation-for="AcceptedTermsCondition" class="text-danger"></span>
+                    <a target="_blank" href="/Home/TermsAndConditions">Terms and Conditions</a>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Sign Up" class="btn btn-primary" />
+                    <a asp-action="Login" asp-controller="Account" class="btn btn-info">Login</a>
+                </div>
+            </form>
+        </div>
     </div>
+
 </div>
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        jQuery.validator.unobtrusive.adapters.add("validatecheckbox", function (options) {
+            if (options.element.tagName.toUpperCase() == "INPUT" && options.element.type.toUpperCase() == "CHECKBOX") {
+                options.rules["required"] = true;
+                if (options.message) {
+                    options.messages["required"] = options.message;
+                }
+            }
+        });
+    </script>
 }

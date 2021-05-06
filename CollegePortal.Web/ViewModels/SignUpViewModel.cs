@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CollegePortal.Web.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace CollegePortal.Web.ViewModels
 {
@@ -8,14 +9,18 @@ namespace CollegePortal.Web.ViewModels
 
         [Required]
         [Display(Name = "User Name")]
-        public string UserName { get; set; }
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Invalid Email Address")]
+        public string Email { get; set; }
 
         [Required]
         [Display(Name = "Password")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
         [Display(Name = "Confirm Password")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage ="Password and Confirm Password do not match")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -28,12 +33,13 @@ namespace CollegePortal.Web.ViewModels
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        
 
-        [Required]
         [Display(Name = "Subscribed For Promotions")]
         public bool SubscribedForPromotions { get; set; }
 
         [Required]
+        [ValidateCheckBox (ErrorMessage ="Please Accept Terms")]
         [Display(Name = "Accepted Terms Condition")]
         public bool AcceptedTermsCondition { get; set; }
 

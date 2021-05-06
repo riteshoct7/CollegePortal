@@ -28,6 +28,9 @@ namespace CollegePortal.Entity.Models
         [Display(Name = "Accepted Terms Condition")]
         public bool AcceptedTermsCondition { get; set; }
 
+        [Required]
+        public DateTime CreatedDate { get; set; }
+
         [NotMapped]
         public string[] Role { get; set; } 
 
