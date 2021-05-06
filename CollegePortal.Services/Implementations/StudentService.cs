@@ -36,7 +36,7 @@ namespace CollegePortal.Services.Implementations
             studentRepository.SaveChanges();
         }
 
-        public IEnumerable<Student> GetAllStudnets()
+        public IEnumerable<Student> GetAllStudents()
         {
             return studentRepository.GetAll();            
         }

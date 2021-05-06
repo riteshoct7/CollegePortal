@@ -9,7 +9,7 @@ namespace CollegePortal.Services.Interfaces
 
         Student GetStudentByid(int id);
 
-        IEnumerable<Student> GetAllStudnets();
+        IEnumerable<Student> GetAllStudents();
 
         void SaveStudent(Student objStudent);
         void UpdateStudent(Student objStudent);
